@@ -7,7 +7,9 @@
   <section class="portfolio-section main__section">
     <div class="container">
       <?php if ($title): ?>
-        <h2 class="portfolio-section__title">Featured Portfolio</h2>
+        <h2 class="portfolio-section__title">
+          <?php echo $title ?>
+        </h2>
       <?php endif ?>
 
       <?php if ($clients): ?>
@@ -16,6 +18,7 @@
             <?php
               $permalink = get_the_permalink( $client_id );
               $client_title = get_the_title( $client_id );
+              $additional_classes = get_field('show_exited_tag', $client_id) ? ' client-logo--exited' : '';
               $logo_id = get_field('logo', $client_id);
               $logo = wp_get_attachment_image( $logo_id, 'full', false, [
                 'class' => 'client-logo__img'
@@ -25,7 +28,7 @@
 
             <a class="client-box portfolio-section__item" href="<?php echo $permalink ?>">
               <?php if ($logo): ?>
-                <div class="client-logo client-logo--small">
+                <div class="client-logo client-logo--small<?php echo $additional_classes ?>">
                   <?php echo $logo ?>
                 </div>
               <?php endif ?>
