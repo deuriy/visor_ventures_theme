@@ -5,7 +5,7 @@
 ?>
 
 <?php if ($infoblocks): ?>
-  <div class="infoblocks-section">
+  <section class="infoblocks-section main__section">
     <div class="container">
       <div class="infoblocks-section__items">
         <?php foreach ($infoblocks as $key => $infoblock): ?>
@@ -62,5 +62,5 @@
         <?php endforeach ?>
       </div>
     </div>
-  </div>
+  </section>
   <?php endif ?>
