@@ -1,9 +1,10 @@
 <?php
   $style = $field['style'];
-  $additional_classes = ' banner--' . $style . '-bg';
+  $banner_classes = ' banner--' . $style . '-bg';
   $title = $field['title'];
   $text = $field['text'];
   $button = $field['button_button'];
+  $button_classes = $style === 'red' ? ' btn-outline' : ' btn-danger btn-danger--text-section';
 
   $image_id = $field['image'];
   $image = wp_get_attachment_image( $image_id, 'full', false, [
@@ -11,7 +12,7 @@
   ] );
 ?>
 
-<section class="banner main__section<?php echo $additional_classes ?>">
+<section class="banner main__section<?php echo $banner_classes ?>">
   <div class="container">
     <div class="banner__inner">
       <?php if ($title): ?>
@@ -43,7 +44,7 @@
           ?>
 
           <?php if ($url && $button['text']): ?>
-            <a class="btn-outline banner__btn" href="<?php echo $url ?>"<?php echo $link_attributes ?>>
+            <a class="banner__btn<?php echo $button_classes ?>" href="<?php echo $url ?>"<?php echo $link_attributes ?>>
               <?php echo $button['text'] ?>
             </a>
           <?php endif ?>

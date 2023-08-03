@@ -14,7 +14,7 @@ get_header();
 ?>
 
 <main class="main">
-	<?php render_page_layouts(get_field('page_blocks')); ?>
+	<?php	render_page_layouts(get_field('page_blocks')); ?>
 </main>
 
 <?php
