@@ -1,11 +1,13 @@
 <?php
   $title = $field['title'];
   $text = $field['text'];
-  $button = $field['button'];
+  $button = $field['button_button'];
   $image_id = $field['image'];
   $image = wp_get_attachment_image( $image_id, 'full', false, [
     'class' => 'text-section__img'
   ] );
+
+  // print_arr($button);
 
   $url = '';
   $link_attributes = '';
