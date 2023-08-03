@@ -1,7 +1,5 @@
 <?php
   $infoblocks = $field['infoblock'];
-
-  // print_arr($infoblocks);
 ?>
 
 <?php if ($infoblocks): ?>
@@ -16,7 +14,6 @@
             $image = wp_get_attachment_image( $infoblock['image'], 'full', false, [
               'class' => 'infoblock__img'
             ] );
-            // print_arr($image);
           ?>
 
           <?php if ($block_type !== 'more_link_box'): ?>
@@ -29,8 +26,6 @@
                   break;
                 case 1:
                   $infoblock_classes .= ' infoblocks-section__item--two-col';
-                default:
-                  // code...
                   break;
               }
             ?>
@@ -54,13 +49,15 @@
                 <?php echo $image ?>
               <?php endif ?>
             </div>
+
           <?php else: ?>
             <a class="more-link-box" href="<?php echo $infoblock['url'] ?>">
               <?php echo $title ?>
             </a>
           <?php endif ?>
+
         <?php endforeach ?>
       </div>
     </div>
   </section>
-  <?php endif ?>
+<?php endif ?>
