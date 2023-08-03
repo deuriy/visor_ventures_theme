@@ -72,6 +72,7 @@ $navbar_type       = get_theme_mod( 'understrap_navbar_type', 'collapse' );
 
         		if ($button['link_type'] === 'simple') {
         			$url = $button['url'];
+        			$link_attributes = ' target="_blank"';
         		} else {
         			$url = '#' . $button['popup_id'];
         			$link_attributes = ' data-toggle-side-popup';

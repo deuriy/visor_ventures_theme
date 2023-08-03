@@ -1,7 +1,9 @@
 <?php
+  $style = $field['style'];
+  $additional_classes = ' banner--' . $style . '-bg';
   $title = $field['title'];
   $text = $field['text'];
-  $button = $field['button'];
+  $button = $field['button_button'];
 
   $image_id = $field['image'];
   $image = wp_get_attachment_image( $image_id, 'full', false, [
@@ -9,14 +11,18 @@
   ] );
 ?>
 
-<section class="banner main__section">
+<section class="banner main__section<?php echo $additional_classes ?>">
   <div class="container">
     <div class="banner__inner">
-      <h2 class="banner__title">Get Investment</h2>
-      <div class="banner__wrapper">
+      <?php if ($title): ?>
+        <h2 class="banner__title">
+          <?php echo $title ?>
+        </h2>
+      <?php endif ?>
 
+      <div class="banner__wrapper">
         <div class="banner__text-and-btn">
-          
+
           <?php if ($text): ?>
             <div class="banner__text">
               <?php echo $text ?>
@@ -29,6 +35,7 @@
 
             if ($button['link_type'] === 'simple') {
               $url = $button['url'];
+              $link_attributes = ' target="_blank"';
             } else {
               $url = '#' . $button['popup_id'];
               $link_attributes = ' data-toggle-side-popup';

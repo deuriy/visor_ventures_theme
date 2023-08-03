@@ -18,7 +18,22 @@ $logo = wp_get_attachment_image( $logo_id, 'full', false, [
 $additional_classes = get_field('show_exited_tag') ? ' client-logo--exited' : '';
 $note = get_field('note');
 $text = get_field('text');
-$button = get_field('button');
+
+$button = get_field('link')['button'];
+$url = '';
+$link_attributes = '';
+
+if ($button['link_type'] === 'simple') {
+	$url = $button['url'];
+	$link_attributes = ' target="_blank"';
+} else {
+	$url = '#' . $button['popup_id'];
+	$link_attributes = ' data-toggle-side-popup';
+}
+
+// print_arr($button);
+
+$page_blocks = get_field('client_page_blocks', 'option')['page_blocks'];
 
 ?>
 
@@ -39,8 +54,8 @@ $button = get_field('button');
 	      </div>
       <?php endif ?>
 
-      <?php if ($button['url'] && $button['text']): ?>
-      	<a class="btn-danger btn-danger--client-section client-section__btn" href="<?php echo $button['url'] ?>">
+      <?php if ($url && $button['text']): ?>
+      	<a class="btn-danger btn-danger--client-section client-section__btn" href="<?php echo $url ?>"<?php echo $link_attributes ?>>
       		<?php echo $button['text'] ?>
       	</a>
       <?php endif ?>
@@ -54,7 +69,7 @@ $button = get_field('button');
   </div>
 </section>
 
-<?php render_page_layouts(get_field('page_blocks')); ?>
+<?php render_page_layouts($page_blocks); ?>
 
 <?php
 get_footer();
