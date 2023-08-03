@@ -30,19 +30,22 @@ add_action( 'wp_enqueue_scripts', 'understrap_remove_scripts', 20 );
 function theme_enqueue_styles() {
 
 	// Get the theme data.
-	$the_theme = wp_get_theme();
+	// $the_theme = wp_get_theme();
 
-	$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-	// Grab asset urls.
-	$theme_styles  = "/css/child-theme{$suffix}.css";
-	$theme_scripts = "/js/child-theme{$suffix}.js";
+	// $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+	// // Grab asset urls.
+	// $theme_styles  = "/css/child-theme{$suffix}.css";
+	// $theme_scripts = "/js/child-theme{$suffix}.js";
 
-	wp_enqueue_style( 'child-understrap-styles', get_stylesheet_directory_uri() . $theme_styles, array(), $the_theme->get( 'Version' ) );
-	wp_enqueue_script( 'jquery' );
-	wp_enqueue_script( 'child-understrap-scripts', get_stylesheet_directory_uri() . $theme_scripts, array(), $the_theme->get( 'Version' ), true );
-	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
-		wp_enqueue_script( 'comment-reply' );
-	}
+	// wp_enqueue_style( 'child-understrap-styles', get_stylesheet_directory_uri() . $theme_styles, array(), $the_theme->get( 'Version' ) );
+	// wp_enqueue_script( 'jquery' );
+	// wp_enqueue_script( 'child-understrap-scripts', get_stylesheet_directory_uri() . $theme_scripts, array(), $the_theme->get( 'Version' ), true );
+	// if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
+	// 	wp_enqueue_script( 'comment-reply' );
+	// }
+
+	wp_enqueue_style( 'theme-styles', get_stylesheet_directory_uri() . '/assets/css/styles.css' );
+	wp_enqueue_style( 'theme-vendor-styles', get_stylesheet_directory_uri() . '/assets/css/vendor.css' );
 }
 add_action( 'wp_enqueue_scripts', 'theme_enqueue_styles' );
 
@@ -86,3 +89,23 @@ function understrap_child_customize_controls_js() {
 	);
 }
 add_action( 'customize_controls_enqueue_scripts', 'understrap_child_customize_controls_js' );
+
+function render_page_layouts($layouts) {
+	if ($layouts) {
+		foreach ($layouts as $key => $layout) {
+			$layout_name = str_replace('_', '-', $layout['acf_fc_layout']);
+			$template = locate_template('page-blocks/'.$layout_name.'.php', false, false);
+			if ($template) {
+				$field = $layout; // Change layout to a friendly name.
+				$field_key = $key;
+				include($template); // if locate_template returns false, include(false) will throw an error
+			}
+		}
+	}
+}
+
+function print_arr($arr) {
+	print '<pre>';
+	print_r($arr);
+	print '</pre>';
+}
